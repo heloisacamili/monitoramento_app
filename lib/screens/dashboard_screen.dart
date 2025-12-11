@@ -37,54 +37,40 @@ class DashboardScreen extends StatelessWidget {
                 'Status: ${provider.banner ? "Ativado" : "Desativado"}',
                 style: const TextStyle(fontSize: 16, color: Colors.black54),
               ),
-
               const SizedBox(height: 20),
-
-              // CARD 1
               _smallCard(
                 icon: Icons.power_settings_new,
                 title: 'Status do Sistema',
                 value: provider.banner ? 'ATIVO' : 'INATIVO',
                 color: Colors.blueAccent,
               ),
-
               const SizedBox(height: 12),
-
-              // CARD 2
               _smallCard(
                 icon: Icons.warning,
                 title: 'Alertas Ativos',
                 value: '0',
                 color: Colors.orangeAccent,
               ),
-
               const SizedBox(height: 12),
-
-              // CARD 3
               _smallCard(
                 icon: Icons.timeline,
                 title: 'Total de Eventos',
                 value: '0',
                 color: Colors.green,
               ),
-
               const SizedBox(height: 12),
-
-              // CARD 4
               _smallCard(
                 icon: Icons.cloud,
                 title: 'Conexão API',
                 value: provider.apiStatus.toUpperCase(),
                 color: Colors.grey.shade500,
               ),
-
               const SizedBox(height: 30),
               const Text(
                 'Emergência',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 12),
-
               GestureDetector(
                 onTap: () async {
                   final success = await provider.triggerAlert();
