@@ -15,8 +15,7 @@ class NotificationService {
     final settings = InitializationSettings(android: androidInit, iOS: iosInit);
 
     await _plugin.initialize(settings);
-
-    // criar canal Android (importante para Android >= 8)
+    
     const androidChannel = AndroidNotificationChannel(
       channelId,
       channelName,
@@ -26,8 +25,8 @@ class NotificationService {
       await _plugin
           .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
           ?.createNotificationChannel(androidChannel);
-    } catch (_) {
-      // ignore, apenas evita crash se plataforma não suportar
+    } catch (e) {
+      print(e);
     }
   }
 
@@ -43,7 +42,7 @@ class NotificationService {
       await _plugin.show(DateTime.now().millisecondsSinceEpoch ~/ 1000, title, body, details);
       return true;
     } catch (e) {
-      // log possível aqui
+      print(e);
       return false;
     }
   }
