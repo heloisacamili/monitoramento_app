@@ -28,7 +28,6 @@ class MonitorProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  /// Retorna true se tudo ocorreu ok (inserção + notificação)
   Future<bool> triggerAlert() async {
     try {
       final time = DateTime.now().toIso8601String();
@@ -38,9 +37,9 @@ class MonitorProvider extends ChangeNotifier {
       final okNotif = await NotificationService().showBasic('Alerta disparado', time);
 
       notifyListeners();
-      return okNotif; // true se notificação ok, false se notificação falhou (mas DB ok)
+      return okNotif;
     } catch (e) {
-      // se quiser, logue o erro: print(e);
+      print(e);
       return false;
     }
   }
