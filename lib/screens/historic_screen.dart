@@ -8,28 +8,24 @@ class HistoryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final p = Provider.of<MonitorProvider>(context, listen: false);
+    final provider = Provider.of<MonitorProvider>(context, listen: false);
 
     return Scaffold(
       appBar: AppBar(title: const Text('Histórico de Alertas')),
       body: FutureBuilder<List<AlertModel>>(
-        future: p.getHistory(),
+        future: provider.getHistory(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
           }
-
           if (!snapshot.hasData || snapshot.data!.isEmpty) {
             return const Center(child: Text('Nenhum alerta registrado ainda.'));
           }
-
           final alerts = snapshot.data!;
-
           return ListView.builder(
             itemCount: alerts.length,
             itemBuilder: (context, index) {
               final event = alerts[index];
-
               return ListTile(
                 leading: const Icon(Icons.warning, color: Colors.red),
                 title: Text(event.type),
